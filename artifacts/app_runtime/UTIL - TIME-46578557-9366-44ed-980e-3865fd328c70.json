@@ -1,0 +1,490 @@
+{
+	"id": "46578557-9366-44ed-980e-3865fd328c70",
+	"createdAt": "2022-02-04T15:47:38.740Z",
+	"updatedAt": "2022-07-26T07:52:25.693Z",
+	"createdBy": "luuk.wosten@neptune-software.com",
+	"changedBy": "kristin.eliassen@neptune-software.com",
+	"objects": [
+		{
+			"fieldNo": "1",
+			"fieldName": "oShell",
+			"fieldParent": 0,
+			"fieldType": "sap.m.Shell",
+			"script": "",
+			"request": [],
+			"response": [],
+			"attributes": [],
+			"data": [
+				{
+					"fieldNo": "2",
+					"fieldName": "oApp",
+					"fieldParent": "1",
+					"fieldType": "sap.m.App",
+					"script": "",
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "4",
+							"fieldName": "oPage",
+							"fieldParent": "2",
+							"fieldType": "sap.m.Page",
+							"script": "",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "title",
+									"grouping": "Properties",
+									"value": "My Calendar",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "60a3e101-e74b-44ea-c663-be80984dd4be",
+									"fieldName": "oCalendar",
+									"fieldParent": "4",
+									"fieldType": "sap.ui.unified.Calendar",
+									"script": "",
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "secondaryCalendarType",
+											"grouping": "Properties",
+											"value": "Gregorian",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "primaryCalendarType",
+											"grouping": "Properties",
+											"value": "Gregorian",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "intervalSelection",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "select",
+											"grouping": "Events",
+											"value": "Anonymous Function",
+											"script": [
+												"==OBJECT STRING==",
+												"// Calendar Get Selected Date",
+												"debugger;",
+												"var value = this.getSelectedDates();",
+												"var date = new Date(value[0].getStartDate());",
+												"var yyyy = date.getFullYear().toString();",
+												"var mm = date.getMonth() + 1;",
+												"var dd = date.getDate();",
+												"",
+												"if (mm.toString().length == 1) {",
+												"    mm = \"0\" + mm;",
+												"}",
+												"",
+												"if (dd.toString().length == 1) {",
+												"    dd = \"0\" + dd;",
+												"}",
+												"",
+												"var seldate = yyyy + mm + dd;",
+												"",
+												"if (!isNaN(seldate)) {",
+												"",
+												"    // To enable a PopUp //",
+												"",
+												"    // Search for events in seldate and show them on a pop-over list",
+												"    // add your array with all of the dates present in the calendar",
+												"    //var data = modeloTable.oData;",
+												"    oPopOverList.removeAllItems();",
+												"",
+												"    // dynamically add your dates to the popup",
+												"    for (var i = 0; i < data.length; i++) {",
+												"        if (data[i].EVENTDATE == seldate) {",
+												"            var newListItem = new sap.m.ObjectListItem();",
+												"            newListItem.setTitle(data[i].ENAME);",
+												"            newListItem.setNumber(parseInt(data[i].YEARS));",
+												"",
+												"            if (data[i].EVENTTYPE === 'B') {",
+												"                newListItem.setNumberUnit(txtTranslateYearsOld.getText());",
+												"            } else {",
+												"                newListItem.setNumberUnit(txtTranslateYearsCompany.getText());",
+												"            }",
+												"            oPopOverList.addItem(newListItem);",
+												"        }",
+												"    }",
+												"    datePopover.setTitle('On ' + value);",
+												"    //open the popup",
+												"    datePopover.openBy(this);",
+												"",
+												"    //To Enable List//",
+												"    var binding = oListEvents.getBinding(\"items\");",
+												"    var filter = new sap.ui.model.Filter(\"EVENTDATE\", \"EQ\", seldate);",
+												"    binding.filter([filter]);",
+												"",
+												"}"
+											],
+											"translation": []
+										}
+									],
+									"data": []
+								},
+								{
+									"fieldNo": "5f7f7e90-b39d-4321-fe7d-5762aa714b79",
+									"fieldName": "oCalendarLegend",
+									"fieldParent": "4",
+									"fieldType": "sap.ui.unified.CalendarLegend",
+									"script": "",
+									"request": [],
+									"response": [],
+									"attributes": [],
+									"data": [
+										{
+											"fieldNo": "a2482a45-1c86-4c9a-9261-98de71f5b199",
+											"fieldName": "oCalendarLegendItem",
+											"fieldParent": "5f7f7e90-b39d-4321-fe7d-5762aa714b79",
+											"fieldType": "sap.ui.unified.CalendarLegendItem",
+											"script": "",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Type10",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "PlaceHolder 1",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "a4b1be3c-a344-4a44-8cc0-d2af708be97f",
+											"fieldName": "oCalendarLegendItem1",
+											"fieldParent": "5f7f7e90-b39d-4321-fe7d-5762aa714b79",
+											"fieldType": "sap.ui.unified.CalendarLegendItem",
+											"script": "",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Type02",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "PlaceHolder 2",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								},
+								{
+									"fieldNo": "f0b60128-3cd7-443e-e175-ca5675e24e00",
+									"fieldName": "oListEvents",
+									"fieldParent": "4",
+									"fieldType": "sap.m.List",
+									"script": "",
+									"bindingValue": "Generic Array",
+									"bindingType": "h",
+									"bindingSource": "P9",
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "noDataText",
+											"grouping": "Properties",
+											"value": "Select an Event",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "headerText",
+											"grouping": "Properties",
+											"value": "Events",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "97e416b4-afbe-4f22-b589-060dba549c16",
+											"fieldName": "oObjectListItem",
+											"fieldParent": "f0b60128-3cd7-443e-e175-ca5675e24e00",
+											"fieldType": "sap.m.ObjectListItem",
+											"script": "",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "title",
+													"grouping": "Properties",
+													"value": "Event",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "number",
+													"grouping": "Properties",
+													"value": "Date Here",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "intro",
+													"grouping": "Properties",
+													"value": "Description of the event",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://calendar",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"fieldNo": 99999,
+			"data": [
+				{
+					"fieldNo": "ecb3d03a-ef0f-4461-ea71-e5e1df67c626",
+					"fieldName": "datePopover",
+					"fieldParent": 99999,
+					"fieldType": "sap.m.Popover",
+					"script": "",
+					"request": [],
+					"response": [],
+					"attributes": [
+						{
+							"attribute": "verticalScrolling",
+							"grouping": "Properties",
+							"value": true,
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "title",
+							"grouping": "Properties",
+							"value": "Date",
+							"script": "",
+							"translation": [
+								{
+									"language": "D",
+									"value": "Termin"
+								},
+								{
+									"language": "P",
+									"value": "Data"
+								},
+								{
+									"language": "S",
+									"value": "Fecha"
+								}
+							]
+						},
+						{
+							"attribute": "showHeader",
+							"grouping": "Properties",
+							"value": true,
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "placement",
+							"grouping": "Properties",
+							"value": "Bottom",
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "horizontalScrolling",
+							"grouping": "Properties",
+							"value": true,
+							"script": "",
+							"translation": []
+						}
+					],
+					"data": [
+						{
+							"fieldNo": "0f298398-1809-4720-8405-30e10a7b44e1",
+							"fieldName": "oPopOverList",
+							"fieldParent": "ecb3d03a-ef0f-4461-ea71-e5e1df67c626",
+							"fieldType": "sap.m.List",
+							"script": "",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "visible",
+									"grouping": "Properties",
+									"value": true,
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "showNoData",
+									"grouping": "Properties",
+									"value": true,
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "rememberSelections",
+									"grouping": "Properties",
+									"value": true,
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "noDataText",
+									"grouping": "Properties",
+									"value": "No Events",
+									"script": "",
+									"translation": [
+										{
+											"language": "D",
+											"value": "Keine Events"
+										},
+										{
+											"language": "P",
+											"value": "Sem Eventos"
+										},
+										{
+											"language": "S",
+											"value": "No Hay Eventos"
+										}
+									]
+								},
+								{
+									"attribute": "modeAnimationOn",
+									"grouping": "Properties",
+									"value": true,
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "38806151-a6ed-4267-9cad-784a965a103d",
+					"fieldName": "onInit",
+					"fieldParent": 99999,
+					"fieldType": "neptune.event.oninit",
+					"script": [
+						"==OBJECT STRING==",
+						"jQuery.sap.require(\"sap.ui.unified.DateTypeRange\");",
+						"",
+						"var oRefDate = new Date();",
+						"",
+						"sap.ui.getCore().attachInit(function(data) {",
+						"",
+						"    oCalendar.addSpecialDate(new sap.ui.unified.DateTypeRange({",
+						"        type: \"Type10\",",
+						"        startDate: new Date(oRefDate)",
+						"    }));",
+						"",
+						"    oCalendar.addSpecialDate(new sap.ui.unified.DateTypeRange({",
+						"        type: \"Type10\",",
+						"        startDate: new Date(oRefDate.setDate(oRefDate.getDate() + 1))",
+						"    }));",
+						"",
+						"",
+						"    oCalendar.addSpecialDate(new sap.ui.unified.DateTypeRange({",
+						"        type: \"Type02\",",
+						"        startDate: new Date(oRefDate.setDate(oRefDate.getDate() + 2))",
+						"    }));",
+						"    setTimeout(function() {",
+						"        //  Do something",
+						"    }, 200);",
+						"",
+						"});"
+					],
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				}
+			]
+		},
+		{
+			"fieldNo": 99998,
+			"data": []
+		}
+	],
+	"ver": "22.7.26.952",
+	"application": "neptbb_calendar",
+	"title": "UTIL - TIME",
+	"description": "Event Calendar",
+	"enableFileStorage": false,
+	"enableManifest": false,
+	"enableStylesheet": false,
+	"enableObfuscate": false,
+	"onlyRunLaunchpad": false,
+	"disabled": false,
+	"loadLaunchpadCode": null,
+	"loadApplicationCode": null,
+	"appType": "C",
+	"ui5_m": true,
+	"ui5_f": false,
+	"ui5_table": false,
+	"ui5_tnt": false,
+	"ui5_uxap": false,
+	"ui5_chart": false,
+	"ui5_theme": "sap_belize",
+	"ui5_version": "",
+	"ui5_language": null,
+	"cus_theme": "",
+	"css": "",
+	"header": "",
+	"manifest": "",
+	"globalScript": "",
+	"deleted": false,
+	"libHighchart": false,
+	"libHighmap": false,
+	"publicAccess": false,
+	"ui5_bootstrap": false,
+	"apis": []
+}
